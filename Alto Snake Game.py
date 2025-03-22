@@ -44,27 +44,30 @@ game_over = False
 score = 0
 
 #game loop
-def change_direction(e): #e = event
-    # print(e)
-    # print(e.keysym)
+def change_direction(e):  # e = event
+    global velocityX, velocityY, game_over, snake, snake_body, food, score
 
-    global velocityX, velocityY, game_over
-    if (game_over):
-        return #edit this code to reset game variables to play again
+    if game_over:
+        # Reset game variables
+        game_over = False
+        snake = Tile(TILE_SIZE * 5, TILE_SIZE * 5)  # Reset snake position
+        food = Tile(TILE_SIZE * 10, TILE_SIZE * 10)  # Reset food position
+        velocityX = 0
+        velocityY = 0
+        snake_body = []  # Clear the snake body
+        score = 0
+        return
 
-    if (e.keysym == "Up" and velocityY != 1):
+    if e.keysym == "Up" and velocityY != 1:
         velocityX = 0
         velocityY = -1
-        
-    elif (e.keysym == "Down" and velocityY != -1):
+    elif e.keysym == "Down" and velocityY != -1:
         velocityX = 0
         velocityY = 1
-
-    elif (e.keysym == "Left" and velocityX != 1):
+    elif e.keysym == "Left" and velocityX != 1:
         velocityX = -1
         velocityY = 0
-
-    elif (e.keysym == "Right" and velocityX != -1):
+    elif e.keysym == "Right" and velocityX != -1:
         velocityX = 1
         velocityY = 0
 
